@@ -2,7 +2,6 @@ package com.exercise.demo.controller;
 
 
 import com.exercise.demo.models.Employees;
-import com.exercise.demo.repository.EmployeeRepository;
 import com.exercise.demo.requests.EmployeeRequest;
 import com.exercise.demo.service.EmployeesTransactionService;
 import org.springframework.web.bind.annotation.*;
@@ -10,41 +9,40 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/employees")
 public class EmployeesController {
 
-    private final EmployeeRepository employeeRepository;
-
     private final EmployeesTransactionService employeesTransactionService;
-    public EmployeesController(EmployeeRepository employeeRepository, EmployeesTransactionService employeesTransactionService) {
-        this.employeeRepository = employeeRepository;
+
+    public EmployeesController(EmployeesTransactionService employeesTransactionService) {
         this.employeesTransactionService = employeesTransactionService;
     }
 
-    @GetMapping("/employees/all")
+    @GetMapping("/all")
     public List<Employees> getAllEmployees() {
-        return employeeRepository.findAll();
+        return employeesTransactionService.getAllEmployees();
     }
 
-    @GetMapping("/employees/{id}")
+    @GetMapping("/{id}")
     public Employees getEmployeeById(@PathVariable Integer id) {
-        return employeeRepository.findById(id).orElseThrow();
+        return employeesTransactionService.getEmployeeById(id);
     }
 
-    @PostMapping("/employees/add")
+    @PostMapping("/add")
     public String addEmployees(@RequestBody EmployeeRequest employee) {
-        employeesTransactionService.saveEmployees(employee);
+        employeesTransactionService.saveEmployee(employee);
         return "Employee was added successfully";
     }
 
-    @PutMapping("/employees/update")
+    @PutMapping("/update")
     public String updateEmployees(@RequestBody EmployeeRequest employee) {
-        employeeRepository.save(employee);
+        employeesTransactionService.updateEmployee(employee);
         return "Employee was updated successfully";
     }
 
-    @DeleteMapping("/employees/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public String deleteEmployees(@PathVariable Integer id) {
-        employeeRepository.deleteById(id);
+        employeesTransactionService.deleteEmployeeById(id);
         return "Employee was deleted successfully";
     }
 }

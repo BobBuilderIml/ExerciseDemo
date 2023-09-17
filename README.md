@@ -15,3 +15,51 @@ What was missed :
 2. No Integration tests
 3. No Exception Handler
 4. No Logs
+5. No Code optimization
+
+
+Example of requests to employees : 
+1. getAllEmployees GET http://localhost:8080/employees/all 
+2. getEmployeeById GET http://localhost:8080/employees/1
+3. addEmployee POST http://localhost:8080/employees/add 
+`{
+   "projectId" : 1,
+   "name": "Harison Ford",
+   "email" : "harisonFord@gmail.com",
+   "salary" : 1800.00,
+   "departmentId" : 1
+   }`
+Project id and department id are optional.
+In case when employee has department , field departmentId is using for connectivity with departments.
+In case when employee has project , field projectId is using for connectivity with projects.
+4. updateEmployees PUT http://localhost:8080/employees/update 
+`{ "id": 1
+   "projectId" : 1,
+   "name": "Harison Ford",
+   "email" : "harisonFord@gmail.com",
+   "salary" : 1800.00,
+   "departmentId" : 1
+   }`
+5. deleteEmployee DELETE http://localhost:8080/employees/delete/1
+
+Example of requests to projects :
+1. getAllProjects GET http://localhost:8080/projects/all
+2. getProjectById GET http://localhost:8080/projects/1
+3. addProject POST http://localhost:8080/projects/add
+   `{
+   "projectName" : "CompanyOne"
+   }`
+4. updateProject PUT http://localhost:8080/projects/update
+   `{ "id" : 1,"name" : "Human Resources"}`
+5. deleteProject DELETE http://localhost:8080/projects/delete/1
+
+Example of requests to departments :
+1. getAllDepartments GET http://localhost:8080/departments/all
+2. getDepartmentById GET http://localhost:8080/department/1
+3. addDepartments POST http://localhost:8080/department/add
+   `{
+   "name" : "Developers"
+   }`
+4. updateDepartments PUT http://localhost:8080/department/update
+   `{ "id" : 1,"name" : "Human Resources"}`
+5. deleteDepartments DELETE http://localhost:8080/department/delete/1

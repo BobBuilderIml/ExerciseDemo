@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/departments")
 public class DepartmentsController {
 
     private final DepartmentRepository departmentRepository;
@@ -16,30 +17,30 @@ public class DepartmentsController {
         this.departmentRepository = departmentRepository;
     }
 
-    @GetMapping("/departments/all")
+    @GetMapping("/all")
     @Transactional
     public List<Departments> getAllDepartments() {
         return departmentRepository.findAll();
     }
 
-    @GetMapping("/department/{id}")
+    @GetMapping("/{id}")
     public Departments getDepartmentById(@PathVariable Integer id) {
         return departmentRepository.findById(id).orElseThrow();
     }
 
-    @PostMapping("/department/add")
+    @PostMapping("/add")
     public String addDepartment(@RequestBody Departments department) {
         departmentRepository.save(department);
         return "Department was added successfully";
     }
 
-    @PutMapping("/department/update")
+    @PutMapping("/update")
     public String updateDepartment(@RequestBody Departments department) {
         departmentRepository.save(department);
         return "Department was added successfully";
     }
 
-    @DeleteMapping("/department/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public String deleteDepartment(@PathVariable Integer id) {
         departmentRepository.deleteById(id);
         return "Department was deleted successfully";

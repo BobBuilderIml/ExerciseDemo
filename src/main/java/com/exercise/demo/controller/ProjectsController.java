@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/projects")
 public class ProjectsController {
 
     private final ProjectRepository projectRepository;
@@ -15,29 +16,29 @@ public class ProjectsController {
         this.projectRepository = projectRepository;
     }
 
-    @GetMapping("/projects/all")
+    @GetMapping("/all")
     public List<Projects> getAllDepartments() {
         return projectRepository.findAll();
     }
 
-    @GetMapping("/projects/{id}")
+    @GetMapping("/{id}")
     public Projects getDepartmentById(@PathVariable Integer id) {
         return projectRepository.findById(id).orElseThrow();
     }
 
-    @PostMapping("/projects/add")
+    @PostMapping("/add")
     public String addProjects(@RequestBody Projects project) {
         projectRepository.save(project);
         return "Projects was added successfully";
     }
 
-    @PutMapping("/projects/update")
+    @PutMapping("/update")
     public String updateProject(@RequestBody Projects project) {
         projectRepository.save(project);
         return "Project was updated successfully";
     }
 
-    @PutMapping("/projects/delete/{id}")
+    @PutMapping("/delete/{id}")
     public String deleteProject(@RequestBody Integer id) {
         projectRepository.deleteById(id);
         return "Project was deleted successfully";
