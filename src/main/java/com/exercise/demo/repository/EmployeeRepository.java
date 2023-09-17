@@ -11,8 +11,6 @@ import java.util.List;
 @Repository
 @Transactional
 public interface EmployeeRepository extends CrudRepository<Employees, Integer> {
-
     List<Employees> findAll();
-
     Employees save(Employees employees);
 }

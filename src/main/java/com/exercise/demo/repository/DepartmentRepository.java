@@ -12,6 +12,5 @@ import java.util.List;
 @Repository
 @Transactional
 public interface DepartmentRepository extends CrudRepository<Departments, Integer> {
-
     List<Departments> findAll();
 }
